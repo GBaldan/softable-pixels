@@ -1,4 +1,4 @@
-// components/Switch.tsx
+// External Libraries
 import React from "react";
 
 interface Props {
