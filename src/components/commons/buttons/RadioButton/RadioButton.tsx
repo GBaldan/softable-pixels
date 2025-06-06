@@ -53,7 +53,7 @@ export const RadioButton: React.FC<Props> = ({
         checked={checked}
         disabled={disabled}
         onChange={handleChange}
-        className={`form-radio text-blue-600 transition duration-150 ease-in-out
+        className={`text-blue-600 transition duration-150 ease-in-out
             ${getSize()}
             ${disabled ? "cursor-not-allowed" : "cursor-pointer"}
           `}
