@@ -2,6 +2,16 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+	--color-primary: #00ff00;
+
+	--color-text-primary: #000000;
+	--color-text-secondary: #000000;
+
+	--color-text-primary-dark: #ffffff;
+	--color-text-secondary-dark: #ffffff;
+}
+
 html {
-  transition: background-color 0.3s ease, color 0.3s ease;
+	transition: background-color 0.3s ease, color 0.3s ease;
 }

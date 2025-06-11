@@ -2,6 +2,9 @@
 // External Libraries
 import type React from 'react'
 import { createContext, useContext, useEffect, useState } from 'react'
+// import { useGlobals } from 'storybook/manager-api'
+// import { addons } from 'storybook/preview-api'
+// import { FORCE_RE_RENDER } from 'storybook/internal/core-events'
 
 // Utils
 import { applyThemeClass, getSystemTheme } from './ThemeProvider.utils'
@@ -26,6 +29,9 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 	const [resolvedTheme, setResolvedTheme] =
 		useState<Omit<Theme, 'system'>>(getSystemTheme)
 
+	// Hooks
+	// const [globals, updateGlobals] = useGlobals()
+
 	useEffect(() => {
 		const stored = localStorage.getItem(THEME_KEY) as Theme | null
 		const initial = stored ?? 'system'
@@ -37,8 +43,7 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 		const listener = (e: MediaQueryListEvent) => {
 			if (theme === 'system') {
 				const sysTheme = e.matches ? 'dark' : 'light'
-				applyThemeClass(sysTheme)
-				setResolvedTheme(sysTheme)
+				setTheme(sysTheme)
 			}
 		}
 
@@ -48,6 +53,11 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 		return () => mql.removeEventListener('change', listener)
 	}, [theme])
 
+	// useEffect(() => {
+	// 	const newTheme = globals.theme ?? 'system'
+	// 	setTheme(newTheme)
+	// }, [globals])
+
 	// Functions
 	function setTheme(newTheme: Theme) {
 		localStorage.setItem(THEME_KEY, newTheme)
@@ -56,6 +66,9 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 		const final = newTheme === 'system' ? getSystemTheme() : newTheme
 		applyThemeClass(final)
 		setResolvedTheme(final)
+
+		// updateGlobals({ theme: final })
+		// addons.getChannel().emit(FORCE_RE_RENDER)
 	}
 
 	function toggleTheme() {

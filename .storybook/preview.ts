@@ -1,7 +1,8 @@
 import type { Preview } from '@storybook/nextjs-vite'
-import '../src/app/globals.css'
+import '../src/styles/globals.css'
 
 const preview: Preview = {
+	tags: ['autodocs'],
 	parameters: {
 		controls: {
 			matchers: {
@@ -15,6 +16,17 @@ const preview: Preview = {
 			// 'error' - fail CI on a11y violations
 			// 'off' - skip a11y checks entirely
 			test: 'todo'
+		}
+	},
+	globalTypes: {
+		theme: {
+			name: 'Theme',
+			description: 'Global theme for components',
+			defaultValue: 'light',
+			toolbar: {
+				icon: 'circlehollow',
+				items: ['light', 'dark']
+			}
 		}
 	}
 }
